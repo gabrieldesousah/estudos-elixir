@@ -6,11 +6,29 @@ defmodule Cards do
   def create_deck do
     values = ["Ace", "Two", "Three", "Four", "Five"]
     suits = ["Spades", "Clubs", "Hearts", "Diamods"]
-
-    for suit <- suits do
-      suit
-    end
     # Simple quotes('') are supposed too, but the conventional is ever double quotes ("")
+    
+
+    # # The wrong approach:
+    # cards = for suit <- suits do
+    #   for value <- values do
+    #   # This operator: "->" don't exist in elixir
+    #   # for values -> value do
+    #     "#{value} of #{suit}"
+    #     # [suit, value]
+    #     # This is a way to do the mesh of two vlaues,
+    #     # But using Elixir, we can do this using a string interpolation
+    #   end
+    # end
+    # List.flatten(cards);
+
+    # The better approach
+    # Using this, the code don't need to use the flatten operator
+    # using the comma to separate the possibilities of loop in any array, 
+    # Elixir will run each array into the other
+    for suit <- suits, value <- values do
+      "#{value} of #{suit}"
+    end
   end
 
   # Elixir will treat the size of the value mathematically. 
